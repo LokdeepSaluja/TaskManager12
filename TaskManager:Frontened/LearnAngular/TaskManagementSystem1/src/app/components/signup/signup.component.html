@@ -1,0 +1,85 @@
+<div class="container">
+    <form [formGroup]="signup" (ngSubmit)="signupdata(signup)" class="form-box1">
+
+        <h3>Signup</h3>
+
+        <div class="form-group" fxLayout="column" fxLayoutAlign="center">
+            <mat-form-field appearance="fill" fxFlex="100%">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="Enter Name" formControlName="name">
+            </mat-form-field>
+            <div fxLayout="column" fxFlex="100%">
+                <mat-error *ngIf="signup.controls['name'].hasError('required') && signup.controls['name'].touched">
+                    Name is required
+                </mat-error>
+
+                <ng-container
+                    *ngIf="signup.controls['name'].hasError('containsNumbers') && signup.controls['name'].touched; else specialCharError">
+                    <mat-error>Name should not contain numbers </mat-error>
+                </ng-container>
+                <ng-template #specialCharError>
+                    <mat-error
+                        *ngIf="signup.controls['name'].hasError('specialCharacters') && signup.controls['name'].touched">
+                        Name should not contain special characters
+                    </mat-error>
+                </ng-template>
+
+            </div>
+        </div>
+
+
+
+        <div class="form-group" fxLayout="column" fxLayoutAlign="center">
+            <mat-form-field appearance="fill" fxFlex="100%">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Enter Email" formControlName="email">
+            </mat-form-field>
+            <div fxLayout="column" fxFlex="100%">
+                <mat-error
+                    *ngIf="signup.controls['email'].hasError('required') && signup.controls['email'].touched">Email
+                    is required</mat-error>
+                <mat-error
+                    *ngIf="signup.controls['email'].hasError('startsWithNumber') && signup.controls['email'].touched ; else emailInvalid">Email
+                    should not start with number</mat-error>
+                <ng-template #emailInvalid>
+                    <mat-error
+                        *ngIf="signup.controls['email'].hasError('email') && signup.controls['email'].touched">Invalid
+                        email format</mat-error>
+                </ng-template>
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group" fxLayout="column" fxLayoutAlign="center">
+            <mat-form-field appearance="fill" fxFlex="100%">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Enter Password" formControlName="password">
+            </mat-form-field>
+            <mat-error
+                *ngIf="signup.controls['password'].hasError('required') && signup.controls['password'].touched">Password
+                is required</mat-error>
+            <mat-error
+                *ngIf="signup.controls['password'].hasError('minlength') && signup.controls['password'].touched; else ULNerror">Password
+                must be at least 8 characters long</mat-error>
+            <ng-template #ULNerror>
+                <mat-error
+                    *ngIf="signup.controls['password'].hasError('invalidPassword') && signup.controls['password'].touched">Password
+                    must contain at least one uppercase letter, one lowercase letter, one number, and one special
+                    character</mat-error>
+            </ng-template>
+
+        </div>
+        <div class="signin-link">
+            <span>
+                You Have Already Account <a routerLink="/login">Signin</a>
+            </span>
+        </div>
+
+
+        <br>
+        <button mat-raised-button color="primary" class="btn btn-success">Signup</button>
+
+    </form>
+</div>

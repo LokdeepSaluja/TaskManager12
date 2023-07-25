@@ -1,0 +1,108 @@
+<br><br>
+<div class="container mt-5" *ngIf="responseData">
+    <div class="d-flex justify-content-between">
+        <h2>Task Details</h2>
+        <button *ngIf=" user_id==responseData.tasks.task_creator && responseData.tasks.user==null "
+            class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal1">Assign
+            Task</button>
+    </div>
+    <br>
+
+    <div class="card p-3 mb-3">
+        <strong>ID:</strong> {{ responseData.tasks.id }}<br>
+        <strong>Title:</strong> {{ responseData.tasks.title }}<br>
+        <strong>Description:</strong> {{ responseData.tasks.description }}<br>
+        <strong>Status:</strong> {{ responseData.tasks.status=='P'?"Pending":"Completed" }}<br>
+        <strong>Date:</strong> {{ responseData.tasks.date }}<br>
+        <button class="btn btn-primary mt-2" (click)="changeStatus(responseData.tasks.id)">Change Status</button>
+
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <h2>Comments</h2>
+        <button class="btn btn-primary" class="btn btn-primary" type="button" class="btn btn-primary"
+            data-toggle="modal" data-target="#exampleModal">Add Comment</button>
+    </div>
+
+    <div class="" *ngIf="responseData.comments.length > 0; else noComments">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let comment of responseData.comments; let i =index ">
+                <div class="card p-3 d-flex flex-row">
+                    <strong class="mr-2">{{ comment.user_name }}</strong>
+                    <span>{{ comment.description }}</span>
+
+
+                    <button
+                        *ngIf="responseData.user_id == comment.user_id || responseData.user_id == responseData.tasks.task_creator"
+                        class="btn btn-sm btn-danger ml-auto" (click)="deleteComment(comment.id)">X</button>
+
+
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ng-template #noComments>
+        <div class="card p-3">
+            <p>No comments available.</p>
+        </div>
+    </ng-template>
+    <button *ngIf=" user_id==responseData.tasks.task_creator" class="btn btn-primary mt-2"
+        (click)="deleteTask(responseData.tasks.id)">Delete Task</button>
+
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="comment" (submit)="addComment(comment)" class="form">
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" placeholder="Enter Description..."
+                            class="form-control" formControlName="description"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="taskassign" (submit)="assignTask(taskassign)" class="form">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input id="email" name="email" type="email" placeholder="Enter Email" class="form-control"
+                            formControlName="email">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

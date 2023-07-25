@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Adjust the height as needed */
+}
+
+.form-box1 {
+    width: 400px;
+    /* Adjust the width of the form as needed */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.signin-link {
+    text-align: right;
+}

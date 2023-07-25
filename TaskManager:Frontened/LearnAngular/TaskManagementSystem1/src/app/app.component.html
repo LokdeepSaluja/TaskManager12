@@ -1,0 +1,29 @@
+<div class="app">
+  <!-- <app-login></app-login> -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 fixed-top">
+    <!-- Brand name on the left -->
+    <a class="navbar-brand mx-3" href="#">TaskManager</a>
+
+    <!-- Add a spacer to push the links to the right -->
+    <div class="flex-grow-1"></div>
+
+    <!-- Navbar links aligned to the right -->
+    <div class="navbar-nav ">
+
+      <ng-container *ngIf="isLoggedIn; else loginSignupLinks">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </ng-container>
+      <!-- Define the "else" template for *ngIf -->
+      <ng-template #loginSignupLinks>
+        <div class="navbar-nav">
+          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/about">About</a>
+          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/signup">Signup</a>
+        </div>
+      </ng-template>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

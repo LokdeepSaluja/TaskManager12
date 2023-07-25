@@ -1,0 +1,40 @@
+<div class="container">
+    <form [formGroup]="login" (ngSubmit)="logindata(login)" class="form-box1">
+        <h3>Login</h3>
+        <!-- <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" formControlName="email" class="form-control mb-3 mt-3" placeholder="Enter Email ">
+        </div> -->
+        <div class="form-group " fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="fill" fxFlex="100%">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Enter Email" formControlName="email">
+            </mat-form-field>
+        </div>
+
+
+
+
+        <!-- <div class="form-group">
+            <label for="">Password </label>
+            <input type="password" formControlName="password" class="form-control mb-3 mt-3"
+                placeholder="Enter Password ">
+        </div> -->
+        <div class="form-group" fxLayout="row" fxLayoutAlign="center">
+            <mat-form-field appearance="fill" fxFlex="100%">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" placeholder="Enter Password">
+            </mat-form-field>
+        </div>
+
+
+        <div class="signup-link">
+            <span>Create New Account <a routerLink="/signup">Signup</a></span>
+        </div>
+
+        <br>
+        <!-- <button type="submit" class="btn btn-success">Login</button> -->
+
+        <button mat-raised-button color="primary" class="btn btn-success">Login</button>
+    </form>
+</div>
